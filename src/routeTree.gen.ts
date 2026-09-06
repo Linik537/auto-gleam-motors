@@ -10,33 +10,89 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as EstoqueRouteImport } from './routes/estoque'
+import { Route as FinancieRouteImport } from './routes/financie'
+import { Route as SobreRouteImport } from './routes/sobre'
+import { Route as CarrosMarcaModeloAnoIdRouteImport } from './routes/carros.$marca.$modelo.$ano.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EstoqueRoute = EstoqueRouteImport.update({
+  id: '/estoque',
+  path: '/estoque',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FinancieRoute = FinancieRouteImport.update({
+  id: '/financie',
+  path: '/financie',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SobreRoute = SobreRouteImport.update({
+  id: '/sobre',
+  path: '/sobre',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CarrosMarcaModeloAnoIdRoute = CarrosMarcaModeloAnoIdRouteImport.update({
+  id: '/carros/$marca/$modelo/$ano/$id',
+  path: '/carros/$marca/$modelo/$ano/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/estoque': typeof EstoqueRoute
+  '/financie': typeof FinancieRoute
+  '/sobre': typeof SobreRoute
+  '/carros/$marca/$modelo/$ano/$id': typeof CarrosMarcaModeloAnoIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/estoque': typeof EstoqueRoute
+  '/financie': typeof FinancieRoute
+  '/sobre': typeof SobreRoute
+  '/carros/$marca/$modelo/$ano/$id': typeof CarrosMarcaModeloAnoIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/estoque': typeof EstoqueRoute
+  '/financie': typeof FinancieRoute
+  '/sobre': typeof SobreRoute
+  '/carros/$marca/$modelo/$ano/$id': typeof CarrosMarcaModeloAnoIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/estoque'
+    | '/financie'
+    | '/sobre'
+    | '/carros/$marca/$modelo/$ano/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/estoque'
+    | '/financie'
+    | '/sobre'
+    | '/carros/$marca/$modelo/$ano/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/estoque'
+    | '/financie'
+    | '/sobre'
+    | '/carros/$marca/$modelo/$ano/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  EstoqueRoute: typeof EstoqueRoute
+  FinancieRoute: typeof FinancieRoute
+  SobreRoute: typeof SobreRoute
+  CarrosMarcaModeloAnoIdRoute: typeof CarrosMarcaModeloAnoIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +104,43 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/estoque': {
+      id: '/estoque'
+      path: '/estoque'
+      fullPath: '/estoque'
+      preLoaderRoute: typeof EstoqueRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/financie': {
+      id: '/financie'
+      path: '/financie'
+      fullPath: '/financie'
+      preLoaderRoute: typeof FinancieRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sobre': {
+      id: '/sobre'
+      path: '/sobre'
+      fullPath: '/sobre'
+      preLoaderRoute: typeof SobreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/carros/$marca/$modelo/$ano/$id': {
+      id: '/carros/$marca/$modelo/$ano/$id'
+      path: '/carros/$marca/$modelo/$ano/$id'
+      fullPath: '/carros/$marca/$modelo/$ano/$id'
+      preLoaderRoute: typeof CarrosMarcaModeloAnoIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  EstoqueRoute: EstoqueRoute,
+  FinancieRoute: FinancieRoute,
+  SobreRoute: SobreRoute,
+  CarrosMarcaModeloAnoIdRoute: CarrosMarcaModeloAnoIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
