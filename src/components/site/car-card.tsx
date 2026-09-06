@@ -1,12 +1,21 @@
 import { Link } from "@tanstack/react-router";
 import { CalendarDays, Gauge } from "lucide-react";
-import { carPath, carTitle, type Car } from "@/lib/cars";
+import { carTitle, slugify, type Car } from "@/lib/cars";
 import { formatKm, formatPrice } from "@/lib/dealership";
 
 export function CarCard({ car }: { car: Car }) {
   return (
     <article className="group overflow-hidden rounded-xl border border-border/70 bg-card shadow-card transition-colors hover:border-primary/60">
-      <Link to={carPath(car)} className="block">
+      <Link
+        to="/carros/$marca/$modelo/$ano/$id"
+        params={{
+          marca: slugify(car.marca),
+          modelo: slugify(car.modelo),
+          ano: String(car.ano),
+          id: car.id,
+        }}
+        className="block"
+      >
         <div className="relative aspect-4/3 overflow-hidden bg-secondary">
           {car.destaque && (
             <span className="absolute left-3 top-3 z-10 rounded-full bg-gradient-gold px-3 py-1 text-xs font-semibold text-primary-foreground">
